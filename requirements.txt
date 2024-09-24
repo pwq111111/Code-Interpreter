@@ -1,0 +1,15 @@
+cython==3.0.10
+cmake==3.29.2
+demon==2.0.6
+graspologic==3.3.0
+karateclub==1.2.3
+leidenalg==0.10.2
+llama_index==0.10.58
+matplotlib==3.8.4
+networkx==3.3
+numpy==1.26.4
+openai==1.26.0
+python-igraph==0.11.5
+pyaml_env==1.2.1
+littleballoffur==2.1.12
+faiss-cpu==1.8.0
