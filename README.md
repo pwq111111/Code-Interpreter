@@ -73,7 +73,7 @@ code_interpreter
 
 将改写后的问题文本向量化（使用 `text-embedding-3-small` 模型），并通过 `faiss` 向量数据库进行检索，召回最相关的 `rate * top_k` 个文档。
 
-#### 重排序
+#### 阶段 3：重排序
 
 召回后的文档进行重排序，通过 `bge-reranker-v2-m3` 模型对这些文档重新排序，并选取前 `top_k` 个文档作为最终的背景知识。
 
