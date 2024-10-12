@@ -47,7 +47,7 @@ code_interpreter
 
 ## 核心功能模块说明
 
-![核心结构图](submit\images\rag.png)
+![核心结构图](submit/images/rag.png)
 
 ### 1. 向量数据库构建
 
