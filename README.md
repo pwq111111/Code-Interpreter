@@ -1,4 +1,3 @@
-
 # Code-Interpreter
 
 **SMP 2024 大模型图分析挑战赛 - 初赛第三名**
@@ -48,15 +47,17 @@ code_interpreter
 
 ## 核心功能模块说明
 
+![核心结构图](submit\images\rag.png)
+
 ### 1. 向量数据库构建
 
-项目中的所有数据均基于主办方提供的原始数据集。向量库的构建流程包括数据预处理与向量化处理，详细实现位于 `faiss_client.py`。
+构建向量数据库索引采用的方案为父子层级索引，项目中的所有数据均基于主办方提供的原始数据集。向量库的构建流程包括数据预处理与向量化处理，详细实现位于 `faiss_client.py`。
 
-#### 数据预处理
+#### 索引构建
 
-针对 `network.json` 等原始文件，每个函数的说明字典被提取为一条记录。通过使用 `\n` 等分隔符，将字典数据转化为适合搜索的文本格式。提取后的 `Description` 字段作为主要的检索字段。
+针对 `network.json` 等原始文件，每个函数的说明字典被提取为一条记录。通过使用 `\n` 等分隔符，将字典数据转化为适合搜索的文本格式，形成 parent chunks，对每个parent chunk 提取 `Description` 字段作为child chunk，每个child chunk 都有一个其所对应的 parent index。query 检索时，在 child chunks 中进行检索，后依据被检索到的child chunks 所对应的 parent index 回至父段块（目的是为了获得更完整的上下文），以父段作为最终的增强信息获得答案。
 
-#### 向量化处理
+#### 向量化说明
 
 使用 `openai text-embedding-3-small` 模型将每条数据向量化，生成用于检索的向量表，并使用 `faiss` 构建向量数据库索引。
 
